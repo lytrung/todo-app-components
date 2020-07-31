@@ -10,7 +10,28 @@ class NewTodoForm extends Component {
         }
     }
     handleContentInputChange = (e)=>{
-        console.log(e.target.value)
+        this.setState({
+            contentInput: e.target.value
+        })
+    }
+
+    handlePriorityInputChange = (e)=>{
+        this.setState({
+            priorityInput: e.target.value
+        })
+    }
+
+    handleAddButtonClick = (e)=>{
+        e.preventDefault()
+        var data = {
+            content: this.state.contentInput,
+            priority: this.state.priorityInput
+        }
+        this.props.addTodo(data)
+        this.setState({
+            contentInput:'',
+            priorityInput:''
+        })
     }
     
     render(){
@@ -19,15 +40,15 @@ class NewTodoForm extends Component {
                 <form className="todo-body">
                     <div className="form-group">
                     <label htmlFor="content-input">Content</label>
-                    <input type="text" className="form-control" id="content-input" onChange={this.handleContentInputChange}/>
+                    <input type="text" className="form-control" id="content-input" value={this.state.contentInput} onChange={this.handleContentInputChange}/>
                     </div>
     
                     <div className="form-group">
                     <label htmlFor="priority-input">Priority</label>
-                    <input type="text" className="form-control" id="priority-input"/>
+                    <input type="text" className="form-control" id="priority-input" value={this.state.priorityInput} onChange={this.handlePriorityInputChange}/>
                     </div>
             
-                    <button type="submit" className="btn btn-primary">Add</button>
+                    <button type="submit" className="btn btn-primary" onClick={this.handleAddButtonClick}>Add</button>
                 </form>
             </div>
         )

@@ -27,6 +27,27 @@ class App extends Component {
       ]
     }
   }
+
+  addTodo = (data)=>{
+    // data = {
+    //   content: 'Ring Peter',
+    //   priority: 'Important'
+    // }
+
+    var newTodo = {
+      id: Date.now(),
+      ...data
+    }
+
+    var newList = [newTodo, ...this.state.todos]
+    this.setState({
+      todos: newList
+    })
+
+  }
+  removeTodo = ()=>{}
+  updateTodo = ()=>{} 
+
   render(){
     return (
       <div className="wrap">
@@ -50,7 +71,7 @@ class App extends Component {
             }
             
        
-            <NewTodoForm/>
+            <NewTodoForm addTodo={this.addTodo}/>
 
           </div>
         </div>
