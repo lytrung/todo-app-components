@@ -45,7 +45,19 @@ class App extends Component {
     })
 
   }
-  removeTodo = ()=>{}
+  removeTodo = (id)=>{
+    var todos = this.state.todos
+
+    var filtered = todos.filter((todo)=>{
+      return todo.id != id
+    })
+
+    this.setState({
+      todos: filtered
+    })
+
+  }
+
   updateTodo = ()=>{} 
 
   render(){
@@ -59,11 +71,12 @@ class App extends Component {
 
                 var todoProps = {
                   key: todo.id,
+                  removeTodo: this.removeTodo,
                   ...todo
                 }
                 return (
 
-                  <Todo {...todoProps} />
+                  <Todo {...todoProps}/>
 
                 )
               })
