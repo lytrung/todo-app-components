@@ -29,10 +29,6 @@ class App extends Component {
   }
 
   addTodo = (data)=>{
-    // data = {
-    //   content: 'Ring Peter',
-    //   priority: 'Important'
-    // }
 
     var newTodo = {
       id: Date.now(),
@@ -58,7 +54,19 @@ class App extends Component {
 
   }
 
-  updateTodo = ()=>{} 
+  updateTodo = (id,data)=>{
+    // id = 1
+    // data = {
+    //   content: 'Water house plants and garden'
+    // }
+    var todos = this.state.todos
+    var updated = todos.map((todo)=>{
+      return (todo.id == id) ? {...todo,...data} : todo
+    })
+    this.setState({
+      todos:updated
+    })
+  } 
 
   render(){
     return (
@@ -66,6 +74,7 @@ class App extends Component {
         <div className="container">
           <div className="todos">
 
+         
             {
               this.state.todos.map((todo)=>{
 
