@@ -6,7 +6,9 @@ class Todo extends Component {
         this.state = {
 
             isContentUpdating: false,
-            contentInput : this.props.content
+            isPriorityUpdating: false,
+            contentInput : this.props.content,
+            priorityInput : this.props.priority
 
         }
     }
@@ -37,6 +39,29 @@ class Todo extends Component {
         })
     }
 
+    handlePriorityDoubleClick = (e)=>{
+        this.setState({
+            isPriorityUpdating:true
+        })
+    }
+    handlePriorityInputBlur = (e)=>{
+
+        var id = this.props.id
+        var data = {
+            priority:this.state.priorityInput
+        }
+        this.props.updateTodo(id,data)
+
+        this.setState({
+            isPriorityUpdating:false
+        })
+    }
+    handlePriorityInputChange = (e)=>{
+        this.setState({
+            priorityInput: e.target.value
+        })
+    }
+
     handleRemoveClick = (e)=>{
         var id = this.props.id
         this.props.removeTodo(id)
@@ -53,8 +78,12 @@ class Todo extends Component {
                         ) : this.props.content
                     }
                 </div>
-                <div className="todo-priority">
-                    {this.props.priority}
+                <div className="todo-priority" onDoubleClick={this.handlePriorityDoubleClick}>
+                    {
+                        this.state.isPriorityUpdating==true ? (
+                            <input type="text" class="form-control form-control-sm" value={this.state.priorityInput} onBlur={this.handlePriorityInputBlur} onChange={this.handlePriorityInputChange}/>
+                        ) : this.props.priority
+                    }
                 </div>
                 </div>
             </div>
