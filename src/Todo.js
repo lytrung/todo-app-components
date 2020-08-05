@@ -4,7 +4,10 @@ class Todo extends Component {
     constructor(props){
         super(props)
         this.state = {
-            isContentUpdating: false
+
+            isContentUpdating: false,
+            contentInput : ''
+
         }
     }
 
@@ -13,6 +16,22 @@ class Todo extends Component {
             isContentUpdating: true
         })
     }
+
+    handleContentInputBlur = (e)=>{
+        //update content based on user input
+
+        //exit content updating mode
+        this.setState({
+            isContentUpdating: false
+        })
+    }
+
+    handleContentInputChange = (e)=>{
+        this.setState({
+            contentInput: e.target.value
+        })
+    }
+
     handleRemoveClick = (e)=>{
         var id = this.props.id
         this.props.removeTodo(id)
@@ -25,7 +44,7 @@ class Todo extends Component {
                 <div className="todo-content" onDoubleClick={this.handleContentDoubleClick}>
                     {
                         this.state.isContentUpdating==true ? (
-                            <input type="text" className="form-control" value="Call Peter"/>
+                            <input type="text" className="form-control" value={this.state.contentInput} onBlur={this.handleContentInputBlur} onChange={this.handleContentInputChange}/>
                         ) : this.props.content
                     }
                 </div>
