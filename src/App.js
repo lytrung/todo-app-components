@@ -81,6 +81,7 @@ class App extends Component {
                 var todoProps = {
                   key: todo.id,
                   removeTodo: this.removeTodo,
+                  updateTodo: this.updateTodo,
                   ...todo
                 }
                 return (

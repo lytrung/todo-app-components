@@ -6,7 +6,7 @@ class Todo extends Component {
         this.state = {
 
             isContentUpdating: false,
-            contentInput : ''
+            contentInput : this.props.content
 
         }
     }
@@ -19,6 +19,11 @@ class Todo extends Component {
 
     handleContentInputBlur = (e)=>{
         //update content based on user input
+        var id = this.props.id
+        var data = {
+            content:this.state.contentInput
+        }
+        this.props.updateTodo(id,data)
 
         //exit content updating mode
         this.setState({
